@@ -1,5 +1,5 @@
-alert("Hola, soy JavaScript");
 //Elemento CANVAS
+alert("Hola, soy JavaScript");
 // Obtenemos el elemento del lienzo 
 var canvas = document.getElementById("personaje");
 
