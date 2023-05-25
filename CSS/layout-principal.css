@@ -4,10 +4,6 @@ html, body {
 ul{
     list-style-type: none;
 }
-li{
-    background-color: transparent;
-    z-index: 200!important;
-}
 li.active{
     box-shadow: 0 0 #ddd;
 }
@@ -26,9 +22,6 @@ header{
     filter: blur(2px);
     z-index: 5!important;
 } */
-#ctd-botones-reproductor~button,div{
-    z-index: 10;
-}
 #contenedor-canva{
     height: 15%;
 }
@@ -36,17 +29,23 @@ header{
     height: 5%;
 }
 #ctd-lista{
-    width: 30%;
+    width: 25%;
     height: 100%;
     z-index: 100!important;
 }
-.ctd-lista-elem{
+a{
+    height: 100%;
+    width: 100%;
+    font-style: normal;
+    text-decoration: none;
+}
+.ctd-lista-elem{/* <li> */
     height: 85px;
     width:100%;
-    /* cursor: pointer; */
+    cursor: pointer;
 }
 .ctd-img-pista{
-    /* position: relative; */
+    position: relative;
     display: inline-block;
     padding: 0;
     height:100%;
@@ -113,17 +112,83 @@ p{
 audio{
     display: none;
 }
-#lbl-cancion-reproductor{
+.cover{
+    height: 128px;
+    width: auto;
+    max-width: 200px;
+    border-radius: .3rem;
+
+}
+/* #lbl-cancion-reproductor{
     transform: translateY(-20px);
 }
 #lbl-artista-reproductor{
     transform: translateY(-23px);
-}
+} */
 #btn-muted-reproductor{
-    margin-left: 47%;
+/*     margin-left: 47%;
     transform:translateY(100px
-    )
+    ) */
 }
 #contenedor-canva{
     height: 450px!important;
 }
+
+/* Progress */
+.progress-container {
+    height: 10px;
+    width: 50%;
+    background-color: #DDD;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+.progress {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 0;
+    height: 100%;
+    border-radius: 10px;
+}
+progress[value]::-webkit-progress-bar {
+    background-color: #0d49fd;
+  }
+#btnVolumen span{
+    padding-right: 20px;
+    z-index: 5;
+}
+.ctd-volumen{
+    width: 50%;
+    margin-bottom: 5px;
+}
+.volumen{
+    width: auto;
+}
+#volumen{
+    width: 100px;
+    transform: translateX(-5px);
+    z-index: 10;
+}
+.volumen .hidden{
+    visibility: collapse;
+}
+#toggleVolumen{
+    display: none;
+}
+.toggle-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+.btn{
+    border: transparent;
+}
+
+/*   #toggleVolumen:checked + .btn > .bi-volume-down-fill:before {
+    content: "\f507";
+  }
+  
+  #toggleVolumen:checked + .btn > .bi-volume-mute-fill:after {
+    content: "\f508";
+  }
+   */
