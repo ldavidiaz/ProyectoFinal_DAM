@@ -23,6 +23,7 @@ header{
     z-index: 5!important;
 } */
 #contenedor-canva{
+    background-color: #215EBB;
     height: 15%;
 }
 #ctd-footer{
@@ -38,6 +39,7 @@ a{
     width: 100%;
     font-style: normal;
     text-decoration: none;
+    border-radius: 3px;
 }
 .ctd-lista-elem{/* <li> */
     height: 85px;
@@ -52,6 +54,7 @@ a{
     width:30%;
     /* cursor: pointer; */
     background-color: transparent;
+    border-radius: 3px 0 0 3px;
     border-top:1px inset rgb(89, 89, 89);
     border-bottom:1px inset rgb(89, 89, 89);
     border-left:1px inset rgb(89, 89, 89);
@@ -89,6 +92,7 @@ a{
     padding: 1em 0 1em 0;
     height: 100%;
     width: 70%;
+    border-radius: 0 3px 3px 0;
     border-top:1px solid rgb(89, 89, 89);
     border-right:1px solid rgb(89, 89, 89);
     border-bottom:1px solid rgb(89, 89, 89);
@@ -119,6 +123,7 @@ audio{
     border-radius: .3rem;
     box-shadow:0 0 5px #E9ECEF;
 }
+
 .blink-animation{
     animation: blink 2s infinite;
 }
@@ -133,6 +138,7 @@ audio{
       box-shadow: 0 0 15px #E9ECEF;
     }
 }
+
 /* #lbl-cancion-reproductor{
     transform: translateY(-20px);
 }
@@ -202,11 +208,27 @@ progress[value]::-webkit-progress-bar {
     transform: scale(1.03);
     
 }
+
 .activeText{
     font-weight: bolder;
     font-size: 12.5px!important;
     color:#DDD!important;
 }
+.blink-animation-lista{
+    animation: blink-lista 8s infinite;
+}
+@keyframes blink-lista {
+    0% {
+      box-shadow: 0 0 15px #0d49fd;
+    }
+    50% {
+      box-shadow: 0 0 5px #0d49fd;
+    }
+    100% {
+      box-shadow: 0 0 15px #0d49fd;
+    }
+}
+
 /*   #toggleVolumen:checked + .btn > .bi-volume-down-fill:before {
     content: "\f507";
   }

@@ -291,6 +291,7 @@ function changeActiveClass(lastIndex, newIndex) {
   
     if (lastIndex !== null) {
       links[lastIndex].classList.remove("active");
+      links[lastIndex].classList.remove("blink-animation-lista");
       const lastLink = links[lastIndex];
       const lastSecondChild = lastLink.children[1];
   
@@ -303,6 +304,8 @@ function changeActiveClass(lastIndex, newIndex) {
     }
   
     links[newIndex].classList.add("active");
+    links[newIndex].classList.add("blink-animation-lista");
+
     const newLink = links[newIndex];
     const newSecondChild = newLink.children[1];
   
