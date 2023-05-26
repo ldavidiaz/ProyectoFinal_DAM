@@ -228,7 +228,9 @@ progress[value]::-webkit-progress-bar {
       box-shadow: 0 0 15px #0d49fd;
     }
 }
-
+.activeBtnBg{
+    background-color: #215EBB;
+}
 /*   #toggleVolumen:checked + .btn > .bi-volume-down-fill:before {
     content: "\f507";
   }

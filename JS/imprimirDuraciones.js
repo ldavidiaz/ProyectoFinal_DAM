@@ -90,5 +90,5 @@ const artistNames = [];
 
         var artistaPista = document.getElementById("lbl-artista-reproductor");
         artistaPista.innerText = autor;
-        console.log("reprodu...")
+        //console.log("reprodu...")
     }

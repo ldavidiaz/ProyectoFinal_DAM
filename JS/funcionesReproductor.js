@@ -32,6 +32,9 @@ const songs = document.getElementById("ctd-lista")
 const audio = document.getElementById("player")
 const cover = document.getElementById("cover")
 const play = document.getElementById("play")
+const btnStop = document.getElementById("stop")
+const randomMode = document.getElementById("random")
+const repeat = document.getElementById("repeat")
 const btnRewind = document.getElementById("btnRewind")
 const btnForward = document.getElementById("btnForward")
 const barraVolumen = document.getElementById("volumen")
@@ -162,11 +165,19 @@ play.addEventListener("click", () => {
       cover.classList.remove("blink-animation");
     }
   });
+
+btnStop.addEventListener("click",stopSong)
+randomMode.addEventListener("click",setRandom)
+repeat.addEventListener("click",setRepeat)
 btnForward.addEventListener("click",forward)
 btnRewind.addEventListener("click", rewind)
 
 let actualSong = null
 let muted = false;
+let getRandom = true;
+let getRepeat = false;
+let contadorRepeat = 0
+//crear la lista de reproduccion
 //Creaamos li y añadimos enlace a la etiqueta li
 function loadSongs(){
     
@@ -226,8 +237,9 @@ function loadSongs(){
     window.imprimirDuracionesPistas();
 }
 
+//pinta la lista de reproduccion
 function loadSong(songIndex){
-    if(songIndex !== actualSong ){
+    if(getRepeat==true || songIndex !== actualSong ){
         changeActiveClass(actualSong, songIndex)
         actualSong = songIndex
         try{//formato 1
@@ -244,9 +256,9 @@ function loadSong(songIndex){
                 //window.playPista()
                 window.pintarReproductor(songList[songIndex].file1,songList[songIndex].autor,songList[songIndex].titulo);
                 changeCover(songIndex)
-            }catch{
-                //download file
-/*                 var descarga = document.createElement("a")
+            }catch{//download file
+                
+/*              var descarga = document.createElement("a")
                 descarga.setAttribute("download")
                 descarga.href = "../Recursos/audios/"+songList[songIndex].file1
                 audio.appendChild(descarga) */
@@ -275,17 +287,42 @@ function playSong(){
                 barraVolumen.value=0
                 audio.muted=true
             }
-        }
-            
+        }         
         updateControles()
     }
-
 }
 
 function pauseSong(){
     audio.pause()
     updateControles()
 }
+
+function stopSong(){
+    audio.pause()
+    audio.currentTime = 0
+    document.getElementById("lbl-inic-reproductor").innerText = "00:00";
+}
+
+function setRandom(){
+    if (getRandom == true){
+        getRandom = false
+        randomMode.classList.remove("activeBtnBg")
+    }else{
+        getRandom = true
+        randomMode.classList.add("activeBtnBg")
+    }
+}
+
+function setRepeat(){
+    if (getRepeat == true){
+        getRepeat = false
+        repeat.classList.remove("activeBtnBg")
+    }else{
+        getRepeat = true
+        repeat.classList.add("activeBtnBg")
+    }
+}
+
 function changeActiveClass(lastIndex, newIndex) {
     const links = document.querySelectorAll("a");
   
@@ -353,19 +390,28 @@ function setProgress(event) {
 
     audio.currentTime = current
 }
+
+//retroceder
 function rewind(){
-    console.log("rewind")
     if(audio.currentTime > 10)
         audio.currentTime-=10
 }
 
-function forward(){
-    console.log("forward")
+//avanzar
+function forward(){   
     if(audio.currentTime+10  < audio.duration)
         audio.currentTime+=10
 }
 
-
+//reproduce la siguiente cancion
+function nextSong() {
+    if (actualSong < songList.length -1) {
+        loadSong(actualSong + 1)
+    } else {
+        loadSong(0)
+    }
+}
+//seleccionar cancion aleatorio
 function randRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
@@ -378,5 +424,23 @@ function randomSong(){
     }
 }
 
-audio.addEventListener("ended", () => randomSong())
+function getModes(){
+    contadorRepeat++
+    console.log(contadorRepeat)
+    if(contadorRepeat>1){
+        getRepeat=false
+        randomMode.classList.remove("activeBtnBg")
+        console.log("ended")
+    }
+    if(getRepeat==true){
+        loadSong(actualSong)
+        
+    }else if(getRepeat==false && getRandom==false){
+        nextSong()
+    }else if(getRepeat==false && getRandom==true){
+        randomSong()
+    }
+}
+
+audio.addEventListener("ended", () => getModes())
 loadSongs()
