@@ -117,7 +117,21 @@ audio{
     width: auto;
     max-width: 200px;
     border-radius: .3rem;
-
+    box-shadow:0 0 5px #E9ECEF;
+}
+.blink-animation{
+    animation: blink 2s infinite;
+}
+@keyframes blink {
+    0% {
+      box-shadow: 0 0 15px #E9ECEF;
+    }
+    50% {
+      box-shadow: 0 0 5px #E9ECEF;
+    }
+    100% {
+      box-shadow: 0 0 15px #E9ECEF;
+    }
 }
 /* #lbl-cancion-reproductor{
     transform: translateY(-20px);
@@ -183,7 +197,16 @@ progress[value]::-webkit-progress-bar {
 .btn{
     border: transparent;
 }
-
+.active{
+    box-shadow: 0px 0px 5px #0d49fd; 
+    transform: scale(1.03);
+    
+}
+.activeText{
+    font-weight: bolder;
+    font-size: 12.5px!important;
+    color:#DDD!important;
+}
 /*   #toggleVolumen:checked + .btn > .bi-volume-down-fill:before {
     content: "\f507";
   }

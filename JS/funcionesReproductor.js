@@ -153,13 +153,15 @@ progressContainer.addEventListener("click", setProgress)
 audio.addEventListener("timeupdate",updateProgress)
 
 //escuchar clicks en el boton play
-play.addEventListener("click",() => {
-    if(audio.paused){
-        playSong()
-    }else{
-        pauseSong()
+play.addEventListener("click", () => {
+    if (audio.paused) {
+      playSong();
+      cover.classList.add("blink-animation");
+    } else {
+      pauseSong();
+      cover.classList.remove("blink-animation");
     }
-} )
+  });
 btnForward.addEventListener("click",forward)
 btnRewind.addEventListener("click", rewind)
 
@@ -226,6 +228,7 @@ function loadSongs(){
 
 function loadSong(songIndex){
     if(songIndex !== actualSong ){
+        changeActiveClass(actualSong, songIndex)
         actualSong = songIndex
         try{//formato 1
             audio.src = "../Recursos/audios/"+songList[songIndex].file1
@@ -283,9 +286,39 @@ function pauseSong(){
     audio.pause()
     updateControles()
 }
+function changeActiveClass(lastIndex, newIndex) {
+    const links = document.querySelectorAll("a");
+  
+    if (lastIndex !== null) {
+      links[lastIndex].classList.remove("active");
+      const lastLink = links[lastIndex];
+      const lastSecondChild = lastLink.children[1];
+  
+      if (lastSecondChild && lastSecondChild.classList.contains("descripcion-pista")) {
+        const lastDivs = lastSecondChild.querySelectorAll("div");
+        lastDivs.forEach((div) => {
+          div.classList.remove("activeText");
+        });
+      }
+    }
+  
+    links[newIndex].classList.add("active");
+    const newLink = links[newIndex];
+    const newSecondChild = newLink.children[1];
+  
+    if (newSecondChild && newSecondChild.classList.contains("descripcion-pista")) {
+      const newDivs = newSecondChild.querySelectorAll("div");
+      newDivs.forEach((div) => {
+        div.classList.add("activeText");
+      });
+    }
+  }
+  
+
 function changeCover(index){
     cover.src="../Recursos/img-audios/"+songList[index].cover
     cover.alt="Imagen de portada"
+    cover.classList.add("blink-animation")
 }
 
 function changeActiveSong(){
