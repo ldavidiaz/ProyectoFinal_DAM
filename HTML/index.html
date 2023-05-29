@@ -14,14 +14,14 @@
     <script src="../JS/funcionesReproductor.js" defer ></script>
     <script src="../JS/imprimirDuraciones.js"></script>
     <script src="../JS/formatearTiempo.js"></script>
-    <title>ProyectoDAM</title>
+    <title>ProjectDAM</title>
     <style>
 
     </style>
 </head>
 <body class="bg-dark">
     <div class="h-100 container-fluid p-0">
-        <main class="d-flex justify-content-start flex-column gap-2">
+        <main class="d-flex justify-content-start flex-column gap-2" >
 
             <header class="d-flex justify-content-start align-items-end gap-1 flex-row pt-2">
                 
@@ -64,7 +64,7 @@
                                 <button type="button" class="btn btn-transparent  btn-lg p-0" id="btnVolumen" onclick="this.blur()">
                                     <span class="bi bi-volume-down-fill text-white fs-4" id="muted" ></span>
                                 </button>
-                                <input type="range" name="volumen" class="hidden" id="volumen" min="0" max="100" step="0.1" value="50" >
+                                <input type="range" name="volumen" class="hidden" id="volumen" min="0" max="100" step="0.1" value="25" >
                             </div>
                         </div>
                         
@@ -124,15 +124,15 @@
                 </diV>
 
             </div>
-            <div class="h-25 d-flex  p-0" id="contenedor-canva"><!-- AINA -->
-                <canvas id="personaje" width="50" height="50"></canvas>
-                <button onclick="handleClick()">Click Me</button> 
+            <div class="d-flex justify-content-center p-0" id="contenedor-canva"><!-- AINA -->
+                <canvas id="personaje" width="230" height="230"></canvas>
                 <img src = "rana.svg" alt="rana SVG"/>
             </div>
             <!-- Footer -->
             <div class="d-flex bg-dark" id="ctd-footer">
-                <footer >
-                    <p class="text-white-50">Luis David Diaz Mesa<br> Aina Caselles</p>
+                <footer class="text-white-50">
+                    <!-- <p class="text-white-50">Luis David Diaz Mesa<br> Aina Caselles Salva</p> -->
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia de Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ProjectDAM</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Luis David Diaz Mesa and Aina Caselles Salva</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Reconocimiento 4.0 Internacional License</a>.
                 </footer>
             </div>
         </main>
@@ -141,6 +141,7 @@
 </html>
 <!-- repositorio de imagenes cc: https://cbamadrid.es/revistaminerva/articulo.php?id=759 -->
 <!-- https://www.flickr.com/photos/campuspartymt/4310143441 -->
+<!-- https://paletadecolores.online/colores-complementarios/ -->
 <!-- repositorio audios cc: https://freemusicarchive.org/genre/Dubstep/ -->
 <!-- repositorio de fuente: https://www.fontshare.com/-->
 <!-- fuente titulo cabecera: https://www.fontshare.com/fonts/teko-->

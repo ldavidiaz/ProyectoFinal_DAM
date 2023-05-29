@@ -40,12 +40,14 @@ header{
 }
 
 #contenedor-canva{
+    position: relative;
     background-color: #215EBB;
     height: 20% !important;
 }
 #ctd-footer{
     height: 8% !important;
     font-size: 12px;
+    padding-left: 5px;
 }
 #ctd-lista{
     width: 25%;
@@ -291,5 +293,15 @@ progress[value]::-webkit-progress-bar {
 }
 /* PERSONAJE */
 #personaje{
-    transform: scale(60%);
+    transform: scale(50%);
+}
+#btn-rana{
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 4px;
+    border: none;
+    font-size: 0.95em;
 }

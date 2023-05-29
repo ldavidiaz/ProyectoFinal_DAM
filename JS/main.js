@@ -58,7 +58,7 @@ function rana(){
     window.requestAnimationFrame(rana);
   }
   
-  window.requestAnimationFrame(rana);
+
   
   // Funcion que pone en movimiento nuestro dibujo
   var id;
@@ -69,11 +69,10 @@ function rana(){
         ctx.translate(110, 110); //movemos el punto sobre el cual girara la figura
         ctx.rotate(Math.PI/30); // rotamos la figura en un angulo de 30º
         ctx.translate(-110, -110); //volvemos a su posicion inicial
-    }
+    }   
   }
-
   //Funcion para controlar si el boton se pulsa o no: va alternando la funcionalidad cada vez que se pulsa
-  var isToggleOn = false;
+  var isToggleOn = true;
   function handleClick() {
     if (isToggleOn) { //Pulsamos de nuevo 1
       clearInterval(id); //Detenemos la accion
@@ -81,6 +80,9 @@ function rana(){
       
     } else { // Si pulsamos el boton por primera vez
       mover(); // Iniciamos la accion 
-      isToggleOn = true; //Cambiamos el estado del boton para que la siguiente vez entre en el otro bucle
+      isToggleOn = true;//Cambiamos el estado del boton para que la siguiente vez entre en el otro bucle
     }
   }
+
+
+  window.requestAnimationFrame(rana);

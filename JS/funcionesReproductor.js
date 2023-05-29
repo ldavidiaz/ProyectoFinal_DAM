@@ -48,13 +48,7 @@ btnVolumen.addEventListener("mouseenter",() =>{
 btnVolumen.addEventListener("mouseleave",()=>{
     barraVolumen.classList.add("hidden")
 })
-/* barraVolumen.addEventListener("mouseleave",()=>{
-    barraVolumen.classList.add("hidden")
-}) */
-/* barraVolumen.addEventListener("input", () => {
-    const volume = barraVolumen.value/100;
-    audio.volume = volume;
-  }); */
+
 barraVolumen.oninput=(e)=>{
     muted = false
     audio.muted=false
@@ -153,9 +147,11 @@ audio.addEventListener("timeupdate",updateProgress)
 play.addEventListener("click", () => {
     if (audio.paused) {
       playSong();
+      window.mover()
       cover.classList.add("blink-animation");
     } else {
       pauseSong();
+      window.clearInterval(id)
       cover.classList.remove("blink-animation");
     }
   });
@@ -257,7 +253,8 @@ function loadSong(songIndex){
         
         audio.onloadeddata = function() {
         if (audio.readyState === 4) {
-            playSong();
+            playSong()
+            resetRana()
             window.pintarReproductor(audio, songList[songIndex].autor, songList[songIndex].titulo);
             changeCover(songIndex);
         }
@@ -269,7 +266,8 @@ function loadSong(songIndex){
             audio.onloadeddata = function() {
             if (audio.readyState === 4) {
             //console.log("2. Segundo archivo de audio cargado correctamente");
-            playSong();
+            playSong()
+            resetRana()
             window.pintarReproductor(audio, songList[songIndex].autor, songList[songIndex].titulo);
             changeCover(songIndex);
             }
@@ -289,62 +287,30 @@ function loadSong(songIndex){
             portada.appendChild(descarga)
         };
         };
-    }
-      
-/*     if(getRepeat==true || songIndex !== actualSong ){
-        changeActiveClass(actualSong, songIndex)
-        actualSong = songIndex
-        try{//formato 1
-            audio.src = "../Recursos/audios/"+songList[songIndex].file1
-            playSong()
-            if(audio.readyState!=0){
-                window.pintarReproductor(songList[songIndex].file1,songList[songIndex].autor,songList[songIndex].titulo);
-                changeCover(songIndex)      
-            }
-        }catch(error){  
-            console.log("second try")
-            if(error.name === 'NotSupportedError' || error.name === 'NotFoundError'){
-                try{//formato 2
-                    audio.src =  "../Recursos/audios/"+songList[songIndex].file2
-                    playSong()
-                    if(audio.readyState!=0){
-                        window.pintarReproductor(songList[songIndex].file1,songList[songIndex].autor,songList[songIndex].titulo);
-                        changeCover(songIndex)
-                    }
-                }catch(e){//download file
-                    console.log("im catch")
-                    const portada = document.getElementById("portada")
-                    cover.classList.remove("src")
-                    cover.classList.remove("alt")
-                    const descarga = document.createElement("a")
-                    descarga.href= "../Recursos/audios/"+songList[songIndex].file1
-                    descarga.setAttribute("download","true")
-                    descarga.textContent= "Descargar archivo"
-                    portada.appendChild(a)
-                }
-            }
-
-        }
-        
-    } */
-    
+    }    
 }
 
 //actualizar play/pause
 function updateControles(){
     if(audio.paused){
-        play.classList.remove("bi-play-fill")
-        play.classList.add("bi-pause-fill")
-    }else{
-        play.classList.add("bi-play-fill")
         play.classList.remove("bi-pause-fill")
+        play.classList.add("bi-play-fill")
+    }else{
+        play.classList.add("bi-pause-fill")
+        play.classList.remove("bi-play-fill")
     }
 }
 
+function resetRana(){
+    window.clearInterval(id)
+    window.ctx.reset()
+    window.mover()
+}
+
 function playSong(){
-    console.log(audio.readyState)
+
     if(actualSong!==null){
-        audio.play()
+        audio.play()            
         if(muted==true)
         {   
             if(audio.volume='0'){
@@ -363,8 +329,14 @@ function pauseSong(){
 
 function stopSong(){
     audio.pause()
+      
     audio.currentTime = 0
     document.getElementById("lbl-inic-reproductor").innerText = "00:00";
+    updateControles()
+
+    //reseteamos rana
+    window.clearInterval(id)
+    window.ctx.reset()
 }
 
 function setRandom(){
