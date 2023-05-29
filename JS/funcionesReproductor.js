@@ -108,19 +108,15 @@ muteSong.addEventListener("click",()=>{
         iconMute.classList.remove(mute)
         iconMute.classList.add(sound)
         barraVolumen.value=20
-        console.log("Aplicamos sonido")
         if(actualSong!=null){
             muted=false
             audio.muted = false
             audio.volume = barraVolumen.value/100;
         }
-/*         audio.muted=false
-        audio.volume = barraVolumen.value/100; */
     }else if(iconMute.classList.contains(sound)){
         iconMute.classList.remove(sound)
         iconMute.classList.add(mute)
         barraVolumen.value=0
-        console.log("Quitamos sonido")
         if(actualSong!=null){
             muted=true;
             audio.muted = true;
@@ -129,7 +125,6 @@ muteSong.addEventListener("click",()=>{
         iconMute.classList.remove(soundUp)
         iconMute.classList.add(mute)
         barraVolumen.value=0
-        console.log("Quitamos sonido")
         if(actualSong!=null){
             muted=true;
             audio.muted = true;
@@ -139,7 +134,6 @@ muteSong.addEventListener("click",()=>{
         iconMute.classList.remove(soundOff)
         iconMute.classList.add(mute)
         barraVolumen.value=0
-        console.log("Quitamos sonido")
         if(actualSong!=null){
             muted=true;
             audio.muted = true;
@@ -186,7 +180,7 @@ function loadSongs(){
         const li = document.createElement("li")
         //Crear <a>
         const link = document.createElement("a")   
-        
+        const linkDescarga = document.createElement("a")
         //Crear contenido de <a>
         const contImg = document.createElement("div")
         const img = document.createElement("img")
@@ -194,10 +188,14 @@ function loadSongs(){
         const contTitulo = document.createElement("div")
         const contAutor = document.createElement("div")
         const contDuracion = document.createElement("div")
-
+        const btnDwl = document.createElement("button")
+        const iconDwl = document.createElement("i")
         //hidratar elementos
         link.href= "#"
         link.setAttribute("class","d-flex")
+        linkDescarga.href=songList[index].file1
+        linkDescarga.setAttribute("class","link-dw")
+        linkDescarga.setAttribute("download","")
 
         li.setAttribute("class","ctd-lista-elem d-flex flex-row gap-0")
         contImg.setAttribute("class", "ctd-img-pista")
@@ -217,6 +215,11 @@ function loadSongs(){
         contDuracion.setAttribute("class","lista-duracion-pista text-white-50 pt-4")
         contDuracion.setAttribute("id",`l-duracion-pista${index}`)
 
+        btnDwl.setAttribute("class","btnDwl")
+        btnDwl.setAttribute("type","button")
+        iconDwl.setAttribute("class","iconDwl bi bi-download")
+
+
         //escuchar clicks
         link.addEventListener("click",() => loadSong(index))
 
@@ -226,11 +229,16 @@ function loadSongs(){
         contDesc.appendChild(contTitulo);
         contDesc.appendChild(contAutor);
         contDesc.appendChild(contDuracion);
+
     
         link.appendChild(contImg);
         link.appendChild(contDesc);
+
+        btnDwl.appendChild(iconDwl)
+        linkDescarga.appendChild(btnDwl)
     
         li.appendChild(link);
+        li.appendChild(linkDescarga)
         // Agregar el elemento <li> al contenedor de la lista
         songs.appendChild(li)
     })
@@ -239,32 +247,87 @@ function loadSongs(){
 
 //pinta la lista de reproduccion
 function loadSong(songIndex){
-    if(getRepeat==true || songIndex !== actualSong ){
+    const src1 = "../Recursos/audios/" + songList[songIndex].file1;
+    const src2 = "../Recursos/audios/" + songList[songIndex].file2;
+    
+    if (getRepeat == true || songIndex !== actualSong) {
+        changeActiveClass(actualSong, songIndex);
+        actualSong = songIndex;
+        audio.src = src1;
+        
+        audio.onloadeddata = function() {
+        if (audio.readyState === 4) {
+            playSong();
+            window.pintarReproductor(audio, songList[songIndex].autor, songList[songIndex].titulo);
+            changeCover(songIndex);
+        }
+        };
+        
+        audio.onerror = function() {
+        // Intentar cargar el segundo src
+            audio.src = src2;
+            audio.onloadeddata = function() {
+            if (audio.readyState === 4) {
+            //console.log("2. Segundo archivo de audio cargado correctamente");
+            playSong();
+            window.pintarReproductor(audio, songList[songIndex].autor, songList[songIndex].titulo);
+            changeCover(songIndex);
+            }
+        };
+        audio.onerror = function() {
+            // Realizar otras acciones en caso de fallo
+            const msgError = "Error al cargar el archivo de audio"
+            document.getElementById("lbl-cancion-reproductor").innerText = msgError
+            document.getElementById("lbl-artista-reproductor").innerText = ""
+            const portada = document.getElementById("portada")
+            cover.classList.remove("src")
+            cover.classList.remove("alt")
+            const descarga = document.createElement("a")
+            descarga.href= "../Recursos/audios/"+songList[songIndex].file1
+            descarga.setAttribute("download","true")
+            descarga.textContent= "Descargar archivo"
+            portada.appendChild(descarga)
+        };
+        };
+    }
+      
+/*     if(getRepeat==true || songIndex !== actualSong ){
         changeActiveClass(actualSong, songIndex)
         actualSong = songIndex
         try{//formato 1
             audio.src = "../Recursos/audios/"+songList[songIndex].file1
             playSong()
-            //window.playPista()
-            window.pintarReproductor(songList[songIndex].file1,songList[songIndex].autor,songList[songIndex].titulo);
-            changeCover(songIndex)
-    
-        }catch{      
-            try{//formato 2
-                audio.src =  "../Recursos/audios/"+songList[songIndex].file2
-                playSong()
-                //window.playPista()
+            if(audio.readyState!=0){
                 window.pintarReproductor(songList[songIndex].file1,songList[songIndex].autor,songList[songIndex].titulo);
-                changeCover(songIndex)
-            }catch{//download file
-                
-/*              var descarga = document.createElement("a")
-                descarga.setAttribute("download")
-                descarga.href = "../Recursos/audios/"+songList[songIndex].file1
-                audio.appendChild(descarga) */
+                changeCover(songIndex)      
             }
+        }catch(error){  
+            console.log("second try")
+            if(error.name === 'NotSupportedError' || error.name === 'NotFoundError'){
+                try{//formato 2
+                    audio.src =  "../Recursos/audios/"+songList[songIndex].file2
+                    playSong()
+                    if(audio.readyState!=0){
+                        window.pintarReproductor(songList[songIndex].file1,songList[songIndex].autor,songList[songIndex].titulo);
+                        changeCover(songIndex)
+                    }
+                }catch(e){//download file
+                    console.log("im catch")
+                    const portada = document.getElementById("portada")
+                    cover.classList.remove("src")
+                    cover.classList.remove("alt")
+                    const descarga = document.createElement("a")
+                    descarga.href= "../Recursos/audios/"+songList[songIndex].file1
+                    descarga.setAttribute("download","true")
+                    descarga.textContent= "Descargar archivo"
+                    portada.appendChild(a)
+                }
+            }
+
         }
-    }
+        
+    } */
+    
 }
 
 //actualizar play/pause
@@ -279,6 +342,7 @@ function updateControles(){
 }
 
 function playSong(){
+    console.log(audio.readyState)
     if(actualSong!==null){
         audio.play()
         if(muted==true)
@@ -324,45 +388,32 @@ function setRepeat(){
 }
 
 function changeActiveClass(lastIndex, newIndex) {
-    const links = document.querySelectorAll("a");
+    const ctdLinks = document.querySelectorAll(".ctd-lista-elem");
   
     if (lastIndex !== null) {
-      links[lastIndex].classList.remove("active");
-      links[lastIndex].classList.remove("blink-animation-lista");
-      const lastLink = links[lastIndex];
-      const lastSecondChild = lastLink.children[1];
+      ctdLinks[lastIndex].classList.remove("active");
   
-      if (lastSecondChild && lastSecondChild.classList.contains("descripcion-pista")) {
-        const lastDivs = lastSecondChild.querySelectorAll("div");
-        lastDivs.forEach((div) => {
-          div.classList.remove("activeText");
-        });
-      }
-    }
-  
-    links[newIndex].classList.add("active");
-    links[newIndex].classList.add("blink-animation-lista");
-
-    const newLink = links[newIndex];
-    const newSecondChild = newLink.children[1];
-  
-    if (newSecondChild && newSecondChild.classList.contains("descripcion-pista")) {
-      const newDivs = newSecondChild.querySelectorAll("div");
-      newDivs.forEach((div) => {
-        div.classList.add("activeText");
+      const lastLink = ctdLinks[lastIndex];
+      const lastDivs = lastLink.querySelectorAll(".activeText");
+      lastDivs.forEach((div) => {
+        div.classList.remove("activeText");
       });
     }
+  
+    const newLink = ctdLinks[newIndex];
+    newLink.classList.add("active");
+    const newDivs = newLink.querySelectorAll(".lista-titulo-pista, .lista-autor-pista, .lista-duracion-pista");
+    newDivs.forEach((div) => {
+      div.classList.add("activeText");
+    });
   }
+  
   
 
 function changeCover(index){
     cover.src="../Recursos/img-audios/"+songList[index].cover
     cover.alt="Imagen de portada"
     cover.classList.add("blink-animation")
-}
-
-function changeActiveSong(){
-
 }
 
 // Actualizar barra de progreso de la canción
@@ -424,13 +475,14 @@ function randomSong(){
     }
 }
 
+//Obtiene los modos de random y repeat para elegir la pista
 function getModes(){
     contadorRepeat++
     console.log(contadorRepeat)
     if(contadorRepeat>1){
-        getRepeat=false
-        randomMode.classList.remove("activeBtnBg")
-        console.log("ended")
+        /* getRepeat=false
+        randomMode.classList.remove("activeBtnBg") */
+        setRepeat();
     }
     if(getRepeat==true){
         loadSong(actualSong)

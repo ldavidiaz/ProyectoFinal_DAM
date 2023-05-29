@@ -1,42 +1,86 @@
 html, body {
     height: 100vh;
 }
+body{
+
+    font-family: Hind-Light,sans-serif;
+}
+
+header h1{
+    /* font-weight: bold; */
+    font-family: Teko-Regular,sans-serif;
+    margin: 0;
+}
+picture img{
+    height: 50px;
+    width: auto;
+}
 ul{
     list-style-type: none;
 }
 li.active{
-    box-shadow: 0 0 #ddd;
+    box-shadow: 0 0 3px #ddd;
+    transform: scale(1.03);
 }
 main{
     height: 100%;
 }
 header{
-    height: 10%;
+    height: 12% !important;
+    color: #f8f9fa;
 }
 #ctd-lista-reproductor{
-    height: 70%;
+    height: 60%!important;
 }
-/* #ctd-reproductor{
-    background-size: cover ;
-    background-image: url("../Recursos/img-audios/img-aud3.png");
-    filter: blur(2px);
-    z-index: 5!important;
-} */
+
 #contenedor-canva{
     background-color: #215EBB;
-    height: 15%;
+    height: 20% !important;
 }
 #ctd-footer{
-    height: 5%;
+    height: 8% !important;
+    font-size: 12px;
 }
 #ctd-lista{
     width: 25%;
     height: 100%;
     z-index: 100!important;
 }
-a{
+#ctd-banner{
+    position: relative;
+    height: 100%; 
+    width: 30%;
+}
+#ctd-img-banner{
+    height: auto;
+    width: auto;
+    object-fit: fill;
+}
+#ad-span{
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    border-radius: 4px;
+    background-color: whitesmoke;
+    height: fit-content;
+    width: fit-content;
+    padding: 2px 4px 2px 4px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    /* letter-spacing : 1px; */
+
+}
+#banner{
+    /* width: 407px; */
+    /* height: 396px; */
     height: 100%;
     width: 100%;
+
+}
+a{
+    height: 100%;
+    width: 92%;
     font-style: normal;
     text-decoration: none;
     border-radius: 3px;
@@ -92,9 +136,9 @@ a{
     padding: 1em 0 1em 0;
     height: 100%;
     width: 70%;
-    border-radius: 0 3px 3px 0;
+    border-radius: 0 0px 0px 0;
     border-top:1px solid rgb(89, 89, 89);
-    border-right:1px solid rgb(89, 89, 89);
+    /* border-right:1px solid rgb(89, 89, 89); */
     border-bottom:1px solid rgb(89, 89, 89);
 }
 
@@ -105,6 +149,29 @@ a{
     max-width: 160px;
     text-align: center;
 }
+
+.link-dw{
+    width: 8%;
+    height: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-radius: 0 3px 3px 0;
+    border-top: 1px solid rgb(89, 89, 89);
+    border-right: 1px solid rgb(89, 89, 89);
+    border-bottom: 1px solid rgb(89, 89, 89);
+    border-left: 1px solid rgb(89, 89, 89);
+}
+.btnDwl{
+    background-color: transparent;
+    border: none;
+}
+.iconDwl{
+    color: whitesmoke;
+    font-size: 13px;
+}
+
 .btn-transparent {
 background-color: transparent;
 border-color: transparent;
@@ -121,7 +188,7 @@ audio{
     width: auto;
     max-width: 200px;
     border-radius: .3rem;
-    box-shadow:0 0 5px #E9ECEF;
+    box-shadow:0 0 5px #215EBB;
 }
 
 .blink-animation{
@@ -129,30 +196,16 @@ audio{
 }
 @keyframes blink {
     0% {
-      box-shadow: 0 0 15px #E9ECEF;
+      box-shadow: 0 0 15px #215EBB;
     }
     50% {
-      box-shadow: 0 0 5px #E9ECEF;
+      box-shadow: 0 0 5px #215EBB;
     }
     100% {
-      box-shadow: 0 0 15px #E9ECEF;
+      box-shadow: 0 0 15px #215EBB;
     }
 }
 
-/* #lbl-cancion-reproductor{
-    transform: translateY(-20px);
-}
-#lbl-artista-reproductor{
-    transform: translateY(-23px);
-} */
-#btn-muted-reproductor{
-/*     margin-left: 47%;
-    transform:translateY(100px
-    ) */
-}
-#contenedor-canva{
-    height: 450px!important;
-}
 
 /* Progress */
 .progress-container {
@@ -203,11 +256,10 @@ progress[value]::-webkit-progress-bar {
 .btn{
     border: transparent;
 }
-.active{
+/* .active{
     box-shadow: 0px 0px 5px #0d49fd; 
     transform: scale(1.03);
-    
-}
+} */
 
 .activeText{
     font-weight: bolder;
@@ -219,23 +271,19 @@ progress[value]::-webkit-progress-bar {
 }
 @keyframes blink-lista {
     0% {
-      box-shadow: 0 0 15px #0d49fd;
+      box-shadow: 0 0 15px #DDD;
     }
     50% {
-      box-shadow: 0 0 5px #0d49fd;
+      box-shadow: 0 0 5px #DDD;
     }
     100% {
-      box-shadow: 0 0 15px #0d49fd;
+      box-shadow: 0 0 15px #DDD;
     }
 }
 .activeBtnBg{
     background-color: #215EBB;
 }
-/*   #toggleVolumen:checked + .btn > .bi-volume-down-fill:before {
-    content: "\f507";
-  }
-  
-  #toggleVolumen:checked + .btn > .bi-volume-mute-fill:after {
-    content: "\f508";
-  }
-   */
+/* PERSONAJE */
+#personaje{
+    transform: scale(60%);
+}
