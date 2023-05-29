@@ -2,7 +2,7 @@ const songList = [
     {
         titulo: "2010 Pop",
         autor: "Akira Sora",
-        cover: "img-aud0.png",
+        cover: "2010_img.png",
         file1: "2010_Pop-Akira_Sora.mp3" ,
         file2:"2010_Pop-Akira_Sora.ogg"
     },

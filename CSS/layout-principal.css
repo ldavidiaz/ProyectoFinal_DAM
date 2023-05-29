@@ -33,6 +33,12 @@ header{
     height: 60%!important;
 }
 
+#ctd-reproductor{
+    height: 100%;
+    width: 45%!important;
+    border-right:3px solid #212529;
+}
+
 #contenedor-canva{
     background-color: #215EBB;
     height: 20% !important;
