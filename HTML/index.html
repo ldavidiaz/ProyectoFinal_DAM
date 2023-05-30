@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- BOOSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    
     <link href="../CSS/layout-principal.css" rel="stylesheet" />
     <link href="../CSS/teko.css" rel="stylesheet" />
     <link href="../CSS/hind.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <script src="../JS/main.js"></script>
     <script src="../JS/funcionesReproductor.js" defer ></script>
     <script src="../JS/imprimirDuraciones.js"></script>
@@ -20,24 +22,31 @@
     </style>
 </head>
 <body class="bg-dark">
-    <div class="h-100 container-fluid p-0">
-        <main class="d-flex justify-content-start flex-column gap-2" >
 
-            <header class="d-flex justify-content-start align-items-end gap-1 flex-row pt-2">
-                
+    <div class="h-100 container-fluid p-0">
+
+        <main class="d-flex justify-content-start flex-column gap-2" >
+            <!-- Seccion de la cabecera -->
+            <header class="d-flex justify-content-start align-items-end gap-1 flex-row pt-2">        
                 <picture class="ps-2 ">
-                    <!-- <source srcset="../temp/LOGO.png">
-                    <source srcset=""> -->
                     <img src="../temp/LOGO.png">
                 </picture>
                 <h1 >ProjectDAM</h1>  
             </header>
-
+            <!-- Seccion de la lista de reproduccion,reproductor y banner -->
             <div class="d-flex flex-row "  id="ctd-lista-reproductor">
                 <!-- Lista de reproduccion -->
                 <ul class="ctd-lista d-flex flex-column gap-2 py-3 ps-3 pe-2 bg-body-secondary bg-opacity-10"  id="ctd-lista">
+                <!-- 
+                    Pista 1: https://freemusicarchive.org/search?adv=1&quicksearch=2010%20Pop&&&music-filter-CC-attribution-only=1&music-filter-public-domain=1&music-filter-commercial-allowed=1
+                    Pista 2: https://freemusicarchive.org/search?adv=1&quicksearch=Help%20you%20out&&&music-filter-CC-attribution-only=1&music-filter-public-domain=1&music-filter-commercial-allowed=1
+                    Pista 3: https://freemusicarchive.org/search?adv=1&quicksearch=Minty%20Mojito&&&music-filter-CC-attribution-only=1&music-filter-public-domain=1&music-filter-commercial-allowed=1
+                    Pista 4: https://freemusicarchive.org/search?adv=1&quicksearch=Apollo&&&music-filter-CC-attribution-only=1&music-filter-public-domain=1&music-filter-commercial-allowed=1
+                    Pista secreta: https://freemusicarchive.org/search?adv=1&quicksearch=Ayakashi&&&music-filter-CC-attribution-only=1&music-filter-public-domain=1&music-filter-commercial-allowed=1
+                 -->
                 </ul>
 
+                <!-- Contenedor del reproductor -->
                 <div class="d-flex justify-content-center bg-body-secondary bg-opacity-10 border-start border-dark border-3"id="ctd-reproductor">
                     <!-- Reproductor de audio -->
                     <div class="d-flex flex-column justify-content-end align-items-center" style="height: 100%; width: 100%;" id="ctd-botones-reproductor">
@@ -58,18 +67,21 @@
                             </audio>
                         </div>
                         
-
+                        <!--Contenedor control de volumen -->
                         <div class="ctd-volumen d-flex">
+
                             <div class="volumen d-flex justify-content-start align-items-center align-self-start" id="ctd-btn-volumen" >
                                 <button type="button" class="btn btn-transparent  btn-lg p-0" id="btnVolumen" onclick="this.blur()">
                                     <span class="bi bi-volume-down-fill text-white fs-4" id="muted" ></span>
                                 </button>
                                 <input type="range" name="volumen" class="hidden" id="volumen" min="0" max="100" step="0.1" value="25" >
                             </div>
+
                         </div>
                         
                         <!-- barra de reproduccion -->
                         <div id="progress-container" class="progress-container">
+                            <!-- etiqueta HTML -->
                             <progress id="progress" value="0" max="100" class="progress"></progress>
                         </div>
 
@@ -81,6 +93,7 @@
 
                         <!-- Contenedor botones de control -->
                         <div class="d-flex flex-row justify-content-evenly mt-3 mb-5" style="width: 55%;" id="ctd-btnsPista-reproductor">
+                            
                             <!-- Botón de aleatorio -->
                             <button type="button" class="btn btn-light btn-sm rounded-circle text-body-emphasis" id="random">
                                 <span class="bi bi-shuffle"></span>
@@ -112,7 +125,6 @@
                             </button>
                         </div>
                     </div>
-
                 </div>
 
                 <!-- Contenedor del banner -->
@@ -124,25 +136,40 @@
                 </diV>
 
             </div>
+            <!-- Seccion de dibujo (y minijuego) -->
             <div class="d-flex justify-content-center p-0" id="contenedor-canva"><!-- AINA -->
                 <canvas id="personaje" width="230" height="230"></canvas>
                 <img src = "rana.svg" alt="rana SVG"/>
             </div>
             <!-- Footer -->
             <div class="d-flex bg-dark" id="ctd-footer">
-                <footer class="text-white-50">
+                <footer class="text-white-50 d-flex flex-row justify-content-start align-items-end">
                     <!-- <p class="text-white-50">Luis David Diaz Mesa<br> Aina Caselles Salva</p> -->
-                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia de Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ProjectDAM</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Luis David Diaz Mesa and Aina Caselles Salva</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Reconocimiento 4.0 Internacional License</a>.
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/" style="width: fit-content;">
+                        <img alt="Licencia de Creative Commons" 
+                        style="border-width:0;" 
+                        src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
+                    </a>
+                    <div style="margin-bottom: 12px;margin-left: 5px;">
+                        <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ProjectDAM</span>
+                        by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">
+                            Luis David Diaz Mesa and Aina Caselles Salva
+                        </span>
+                        is licensed under a 
+                        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+                            Creative Commons Reconocimiento 4.0 Internacional License
+                        </a>.
+                    </div>
                 </footer>
             </div>
         </main>
     </div>   
 </body>
 </html>
-<!-- repositorio de imagenes cc: https://cbamadrid.es/revistaminerva/articulo.php?id=759 -->
-<!-- https://www.flickr.com/photos/campuspartymt/4310143441 -->
-<!-- https://paletadecolores.online/colores-complementarios/ -->
-<!-- repositorio audios cc: https://freemusicarchive.org/genre/Dubstep/ -->
+<!-- fuente de imagenes cc: https://cbamadrid.es/revistaminerva/articulo.php?id=759 -->
+<!-- primeria imagen de la pista: https://www.flickr.com/photos/campuspartymt/4310143441 -->
+<!-- Gama de color como fuente de inspiracion: https://paletadecolores.online/azul/azul-electrico/ -->
+<!-- repositorio audios cc: https://freemusicarchive.org/-->
 <!-- repositorio de fuente: https://www.fontshare.com/-->
 <!-- fuente titulo cabecera: https://www.fontshare.com/fonts/teko-->
-<!-- fuente texto cuerpo: https://www.fontshare.com/fonts/hind -->
+<!-- fuente texto del cuerpo: https://www.fontshare.com/fonts/hind -->

@@ -1,4 +1,8 @@
-    function imprimirDuracionesPistas() {
+   /* 
+   Funcion que obtiene la duración total de una pista para pintarla en la
+   lista de reproducción.
+   */
+   function imprimirDuracionesPistas() {
         const audElem0 =new Audio("../Recursos/audios/2010_Pop-Akira_Sora.mp3")
         const audElem1 =new Audio("../Recursos/audios/Help_You_Out_(ft.Jonathon)-Leonell_Cassio.mp3")
         const audElem2 =new Audio("../Recursos/audios/Szistirra-Minty_Mojito_ft_Akira_Sora.mp3")
@@ -36,6 +40,10 @@
         });  
     }
 
+    /* 
+    Formatea el duracion en segundo que se haya pasado como parámetro 
+    al formato mm:ss como un string 
+    */
     function formatTime(duration) {
         var minutes = Math.floor(duration / 60);
         var seconds = Math.floor(duration % 60);
@@ -44,6 +52,11 @@
         return minutesStr + ':' + secondsStr;
     }
 
+    /* 
+    Pinta en el reproductor la información que se pasa por parametros.
+    Con "src2, obtenemos la duración final para actualizar el timer de
+    la duración total de la pista
+    */
     function pintarReproductor(src,autor,titulo){
         var lblInic = document.getElementById("lbl-inic-reproductor");
         var lblFin = document.getElementById("lbl-fin-reproductor");

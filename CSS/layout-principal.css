@@ -1,26 +1,49 @@
-html, body {
-    height: 100vh;
-}
+/* Estilo etiquetas caracter general */
 body{
 
     font-family: Hind-Light,sans-serif;
 }
 
-header h1{
-    /* font-weight: bold; */
-    font-family: Teko-Regular,sans-serif;
-    margin: 0;
-}
-picture img{
-    height: 50px;
-    width: auto;
-}
 ul{
     list-style-type: none;
 }
+p{
+    margin-bottom: 0;
+}
+audio{
+    display: none;
+}
+a{
+    height: 100%;
+    width: 92%;
+    font-style: normal;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
 li.active{
     box-shadow: 0 0 3px #ddd;
     transform: scale(1.03);
+}
+
+/* Modificaciones elementos boostrap */
+.btn{
+    border: transparent;
+    z-index: 5;
+}
+.btn:hover{
+    background-color: none !important;
+}
+
+.btn-transparent {
+    background-color: transparent;
+    border-color: transparent;
+}
+/* **************************************** */
+
+/* CONTENEDORES PRINCIPALES */
+html, body {
+    height: 100vh;
 }
 main{
     height: 100%;
@@ -32,13 +55,21 @@ header{
 #ctd-lista-reproductor{
     height: 60%!important;
 }
-
+#ctd-lista{
+    width: 25%;
+    height: 100%;
+    z-index: 100!important;
+}
 #ctd-reproductor{
     height: 100%;
     width: 45%!important;
     border-right:3px solid #212529;
 }
-
+#ctd-banner{
+    position: relative;
+    height: 100%; 
+    width: 30%;
+}
 #contenedor-canva{
     position: relative;
     background-color: #215EBB;
@@ -49,50 +80,21 @@ header{
     font-size: 12px;
     padding-left: 5px;
 }
-#ctd-lista{
-    width: 25%;
-    height: 100%;
-    z-index: 100!important;
+/* *************************************** */
+
+/* Estilos elementos Cabecera */
+header h1{
+    /* font-weight: bold; */
+    font-family: Teko-Regular,sans-serif;
+    margin: 0;
 }
-#ctd-banner{
-    position: relative;
-    height: 100%; 
-    width: 30%;
-}
-#ctd-img-banner{
-    height: auto;
+picture img{
+    height: 50px;
     width: auto;
-    object-fit: fill;
 }
-#ad-span{
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    border-radius: 4px;
-    background-color: whitesmoke;
-    height: fit-content;
-    width: fit-content;
-    padding: 2px 4px 2px 4px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-    /* letter-spacing : 1px; */
+/* *************************************** */
 
-}
-#banner{
-    /* width: 407px; */
-    /* height: 396px; */
-    height: 100%;
-    width: 100%;
-
-}
-a{
-    height: 100%;
-    width: 92%;
-    font-style: normal;
-    text-decoration: none;
-    border-radius: 3px;
-}
+/* Estilos elementos Lista de reproduccion*/
 .ctd-lista-elem{/* <li> */
     height: 85px;
     width:100%;
@@ -104,7 +106,6 @@ a{
     padding: 0;
     height:100%;
     width:30%;
-    /* cursor: pointer; */
     background-color: transparent;
     border-radius: 3px 0 0 3px;
     border-top:1px inset rgb(89, 89, 89);
@@ -118,28 +119,6 @@ a{
     object-fit: cover;
     z-index: 100;
 }
-.play-pause-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: fit-content;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    /* filter: drop-shadow(0 0 10px #333); */
-    background-color: rgba(25, 25, 25, 0.75);
-    border-radius: 50%;
-    z-index: 100;
-}
-
-.ctd-img-pista:hover .play-pause-icon {
-    opacity: 1;
-}
-
-
 .descripcion-pista{
     padding: 1em 0 1em 0;
     height: 100%;
@@ -179,18 +158,57 @@ a{
     color: whitesmoke;
     font-size: 13px;
 }
+.activeText{
+    font-weight: bolder;
+    font-size: 12.5px!important;
+    color:#DDD!important;
+}
+.blink-animation-lista{
+    animation: blink-lista 8s infinite;
+}
+@keyframes blink-lista {
+    0% {
+      box-shadow: 0 0 15px #DDD;
+    }
+    50% {
+      box-shadow: 0 0 5px #DDD;
+    }
+    100% {
+      box-shadow: 0 0 15px #DDD;
+    }
+}
+/* ********************************** */
 
-.btn-transparent {
-background-color: transparent;
-border-color: transparent;
-/* filter: invert(100%); */
+/* Estilos elementos Banner */
+#ctd-img-banner{
+    height: auto;
+    width: auto;
+    object-fit: fill;
 }
-p{
-    margin-bottom: 0;
+#ad-span{
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    border-radius: 4px;
+    background-color: whitesmoke;
+    height: fit-content;
+    width: fit-content;
+    padding: 2px 4px 2px 4px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    /* letter-spacing : 1px; */
+
 }
-audio{
-    display: none;
+#banner{
+    height: 100%;
+    width: 100%;
+
 }
+/* *********************************** */
+
+/* Estilos elementos reproductor */
+
 .cover{
     height: 128px;
     width: auto;
@@ -198,7 +216,6 @@ audio{
     border-radius: .3rem;
     box-shadow:0 0 5px #215EBB;
 }
-
 .blink-animation{
     animation: blink 2s infinite;
 }
@@ -213,9 +230,7 @@ audio{
       box-shadow: 0 0 15px #215EBB;
     }
 }
-
-
-/* Progress */
+/* Progress bar*/
 .progress-container {
     height: 10px;
     width: 50%;
@@ -233,6 +248,7 @@ audio{
 progress[value]::-webkit-progress-bar {
     background-color: #0d49fd;
   }
+/* Volumen */
 #btnVolumen span{
     padding-right: 20px;
     z-index: 5;
@@ -260,38 +276,13 @@ progress[value]::-webkit-progress-bar {
     opacity: 0;
     pointer-events: none;
   }
-
-.btn{
-    border: transparent;
-}
-/* .active{
-    box-shadow: 0px 0px 5px #0d49fd; 
-    transform: scale(1.03);
-} */
-
-.activeText{
-    font-weight: bolder;
-    font-size: 12.5px!important;
-    color:#DDD!important;
-}
-.blink-animation-lista{
-    animation: blink-lista 8s infinite;
-}
-@keyframes blink-lista {
-    0% {
-      box-shadow: 0 0 15px #DDD;
-    }
-    50% {
-      box-shadow: 0 0 5px #DDD;
-    }
-    100% {
-      box-shadow: 0 0 15px #DDD;
-    }
-}
+/* Estilo activo botones aleatorio y repeat */
 .activeBtnBg{
     background-color: #215EBB;
 }
-/* PERSONAJE */
+/* ************************** */
+
+/* Estilo elementos Dibujo */
 #personaje{
     transform: scale(50%);
 }
@@ -305,3 +296,4 @@ progress[value]::-webkit-progress-bar {
     border: none;
     font-size: 0.95em;
 }
+/* ****************************** */
