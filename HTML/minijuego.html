@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    canvas {
+        border:1px solid #d3d3d3;
+        background-color: #f1f1f1;
+    }
+    </style>
+<meta charset=utf-8 />
+<script src="prueba.js"></script>
+</head>
+<body onload="startGame()">
+  <script>
+
+var myGamePiece;
+var pista1, pista2, pista3, pista4;
+
+function startGame() {
+    myGamePiece = new component(30, 30, "red", 10, 120);
+    pista1  = new component(20, 20, "blue", 300, 120);   
+    pista2  = new component(20, 20, "green", 200, 100);   
+    pista3  = new component(20, 20, "yellow", 300, 80);   
+    pista4  = new component(20, 20, "orange", 200, 140);   
+
+    myGameArea.start();
+}
+
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 480;
+        this.canvas.height = 270;
+        this.context = this.canvas.getContext("2d");
+        this.frameNo = 0;
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.interval = setInterval(updateGameArea, 20);
+        //pista1.mover();
+
+    },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+    stop : function() {
+        clearInterval(this.interval);
+    }
+}
+
+function component(width, height, color, x, y) {
+    var vy = 4;
+    var vx = 4;
+    this.width = width;
+    this.height = height;
+    this.speedX = 0;
+    this.speedY = 0;    
+    this.x = x;
+    this.y = y;    
+    this.update = function() {
+        ctx = myGameArea.context;
+        ctx.fillStyle = color;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
+    this.mover = function() {
+    	ctx = myGameArea.context;
+        this.y =  Math.floor(Math.random()*(250-10+1)+10);
+        this.x = Math.floor(Math.random()*(60-430+1)+430);
+        
+    }
+    this.mover2 = function() {
+    	ctx = myGameArea.context;
+      ctx.clearRect(0,0, this.width, this.height);
+
+      this.update();
+      this.x += this.vx; //MOVIMIENTO LINEAL
+      this.y += this.vy;
+
+      if (this.y > this.height - 20 || this.y < 0) {  // AQUI COMPROBAMOS LA POSICIÓN DE LA BOLA
+        this.vy *= -1;                                                 // RESPECTO DEL EJE. SI TOCA EL LIMITE LA 
+      }                                                                // LA VELOCIDAD SE INVIERTE DE SIGNO
+      if (this.x + this.vx > this.width - 20|| this.x + this.vx < 0) {
+        this.vx *= -1;
+      }
+    }
+
+    this.delete = function() {
+        ctx = myGameArea.context;
+        ctx.clearRect(this.x, this.y, this.width, this.height);
+    }
+    this.crashWith = function(otherobj) {
+        var myleft = this.x;
+        var myright = this.x + (this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var crash = true;
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+            crash = false;
+        }
+        return crash;
+    }
+}
+var p1 = 0, p2 = 0, p3 = 0, p4 = 0, total = 4;
+
+function updateGameArea() {
+  var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+    //Si se choca contra un objeto
+    if (myGamePiece.crashWith(pista1) || p1 == 1) {
+        pista1.delete();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+          
+        p1 = 1;
+        total - 1;
+        //myGameArea.stop();
+        
+    }else if(myGamePiece.crashWith(pista2)){
+        pista2.delete();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+
+        p2 = 1;
+    }
+    else if(myGamePiece.crashWith(pista3)){
+        pista3.delete();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+
+        p3 = 1;
+    }
+    else if(myGamePiece.crashWith(pista3)){
+        pista3.delete();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+
+        p3 = 1;
+    }
+    else if(myGamePiece.crashWith(pista4)){
+        pista4.delete();
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+
+        p4 = 1;
+    }
+    myGameArea.clear();
+    myGameArea.frameNo += 1
+    if (myGameArea.frameNo == 1, everyinterval(100) ) {
+      pista1.mover();
+      pista2.mover();
+      pista3.mover();
+      pista4.mover();
+    }
+    myGameArea.clear();
+    if (p1 == 0){
+      pista1.update();
+    }
+    if (p2 == 0){
+      pista2.update();
+    }
+    if (p3 == 0){
+      pista3.update();
+    }
+    if (p4 == 0){
+      pista4.update();
+    }
+    myGamePiece.x += myGamePiece.speedX;
+    myGamePiece.y += myGamePiece.speedY; 
+    //pista1.mover()   
+    myGamePiece.update();
+    }
+    var x, y;
+    
+    //myGameArea.clear();
+    myGameArea.frameNo += 1;
+   
+    myGamePiece.newPos();  
+    //pista1.mover2();
+    myGamePiece.update();
+    //
+    
+//}
+function everyinterval(n) {
+    if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
+    return false;
+}
+
+function moveup() {
+    myGamePiece.speedY = -1; 
+}
+
+function movedown() {
+    myGamePiece.speedY = 1; 
+}
+
+function moveleft() {
+    myGamePiece.speedX = -1; 
+}
+
+function moveright() {
+    myGamePiece.speedX = 1; 
+}
+
+function clearmove() {
+    myGamePiece.speedX = 0; 
+    myGamePiece.speedY = 0; 
+}
+
+  
+  // Funcion que pone en movimiento nuestro dibujo
+  var id;
+  function mover() {
+    id = setInterval(movimiento, 100); //establecemos la velocidad a la cual girará nuestro elemento
+    function movimiento() {
+        ctx.clearRect(0,0,225,225);
+        ctx.translate(110, 110); //movemos el punto sobre el cual girara la figura
+        ctx.rotate(Math.PI/30); // rotamos la figura en un angulo de 30º
+        ctx.translate(-110, -110); //volvemos a su posicion inicial
+    }   
+  }
+//</script>
+<div style="text-align:center;width:480px;">
+  <button onmousedown="moveup()" onmouseup="clearmove()" ontouchstart="moveup()">ARRIBA</button><br><br>
+  <button onmousedown="moveleft()" onmouseup="clearmove()" ontouchstart="moveleft()">IZQ</button>
+  <button onmousedown="moveright()" onmouseup="clearmove()" ontouchstart="moveright()">DER</button><br><br>
+  <button onmousedown="movedown()" onmouseup="clearmove()" ontouchstart="movedown()">ABAJO</button>
+</div>
+    
+    </script>
+</body>
+</html>
