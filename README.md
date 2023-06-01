@@ -1,6 +1,7 @@
 # Proyecto_DAM
 En este proyecto se ha elaborado una aplicación web,que por apartados
-se ha desarrollado: 
+se ha desarrollado:
+
   -Layout con Boostrap
   -Lista de reproducción interactiva
   -Reproductor de audio con JavaScript y uso del HTML Audio/Video DOM Reference
