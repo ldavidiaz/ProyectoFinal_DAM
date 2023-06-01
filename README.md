@@ -1,4 +1,4 @@
-# Proyecto_DAM
+# Proyecto Final. Diseño de Aplicaciones Multimedia
 En este proyecto se ha elaborado una aplicación web,que por apartados
 se ha desarrollado:
 
