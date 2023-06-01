@@ -24,6 +24,8 @@ se ha desarrollado:
 Tecnologías utilizadas: HTML, CSS, Boostrap y JavaScript
 
 Autor/es: 
+
 Luis David Diaz Mesa @ldavidiaz
+
 Aina Caselles Salva @ainacs
   
